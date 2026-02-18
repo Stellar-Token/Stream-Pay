@@ -1,337 +1,421 @@
-# StellarTech 🌟
+# StreamPay
 
-## 🎯 Overview
+## 🌟 Overview
 
-StellarTech is a revolutionary financial platform built on the Stellar blockchain that combines **mass disbursement capabilities** with **AI-driven portfolio management**. We're bridging the gap between the unbanked population and global financial markets, enabling anyone to receive payments and invest in tokenized real-world assets (RWAs) with zero crypto knowledge required.
+StreamPay is a decentralized micropayment streaming service that enables content creators to receive real-time payments as users consume their content. Built on the Stellar blockchain, StreamPay leverages sub-second finality to make per-second micropayments viable for articles, music, videos, and other digital content.
 
-### 🌍 The Problem We Solve
+### Key Features
 
-- **1.7 billion adults** worldwide are unbanked or underbanked
-- Traditional investment platforms require minimum balances and banking relationships
-- Cross-border payments are slow (3-5 days) and expensive (2-7% fees)
-- Emerging market populations lack access to global investment opportunities
-- Financial literacy and portfolio management expertise is inaccessible to most
-
-### 💡 Our Solution
-
-**Entry Point → Growth → Wealth Building**
-
-1. **Mass Disbursement**: Organizations disburse payroll, aid, or remittances via SMS
-2. **Instant Wallets**: Recipients get auto-created wallets with no crypto knowledge needed
-3. **Investment Access**: Buy fractional tokenized stocks, bonds, and carbon credits
-4. **AI Optimization**: Personalized portfolio management and rebalancing
-5. **Financial Education**: AI-powered coaching and market insights
-
----
-
-## ✨ Key Features
-
-### 💸 Mass Disbursement Platform
-- **Bulk Payments**: CSV upload for thousands of recipients
-- **SMS Onboarding**: No app download required
-- **Multi-Asset Support**: USDC, local stablecoins, and custom tokens
-- **Instant Settlement**: Leverage Stellar's 3-5 second finality
-- **Compliance Ready**: Built-in KYC/AML workflows
-
-### 📈 Investment Marketplace
-- **Tokenized Assets**: Trade stocks, bonds, carbon credits, and more
-- **Fractional Ownership**: Invest as little as $1 in any asset
-- **Real-Time Pricing**: Oracle-powered market data
-- **P2P Trading**: Direct asset exchange between users
-- **Yield Opportunities**: Earn on idle stablecoin balances
-
-### 🤖 AI Portfolio Management
-- **Risk Profiling**: Personalized investment strategies
-- **Auto-Rebalancing**: Maintain optimal asset allocation
-- **Goal-Based Investing**: Target retirement, education, or wealth goals
-- **Smart Recommendations**: ML-powered asset suggestions
-- **Market Intelligence**: Sentiment analysis and trend detection
-
-### 🔒 Security & Compliance
-- **Non-Custodial**: Users control their private keys
-- **Biometric Recovery**: No seed phrases to manage
-- **Regulatory Compliance**: KYC/AML integration
-- **Smart Contract Audits**: Thoroughly tested Soroban contracts
-- **End-to-End Encryption**: Secure data handling
-
----
+- **Real-time Payments**: Creators receive payments every second as content is consumed
+- **Low Transaction Costs**: Leverage Stellar's minimal fees (~0.00001 XLM per transaction)
+- **Multiple Content Types**: Support for articles, music, videos, podcasts, and live streams
+- **Creator Dashboard**: Analytics, earnings tracking, and payout management
+- **Flexible Pricing**: Set per-second, per-minute, or per-view rates
+- **Instant Withdrawals**: Access earnings immediately without waiting periods
+- **Multi-currency Support**: Accept payments in XLM, USDC, and other Stellar assets
 
 ## 🏗️ Architecture
 
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         Frontend                             │
+│                    (Next.js + React)                        │
+│  - User Interface                                           │
+│  - Content Player                                           │
+│  - Creator Dashboard                                        │
+│  - Wallet Integration                                       │
+└──────────────────┬──────────────────────────────────────────┘
+                   │
+                   │ REST API / WebSocket
+                   │
+┌──────────────────▼──────────────────────────────────────────┐
+│                         Backend                              │
+│                    (NestJS + Node.js)                       │
+│  - Authentication & Authorization                           │
+│  - Content Management                                       │
+│  - Payment Processing                                       │
+│  - Analytics & Reporting                                    │
+│  - Streaming Session Management                            │
+└──────────────────┬──────────────────────────────────────────┘
+                   │
+                   │ Stellar SDK
+                   │
+┌──────────────────▼──────────────────────────────────────────┐
+│                    Smart Contracts                           │
+│                      (Rust/Soroban)                         │
+│  - Payment Stream Contract                                  │
+│  - Escrow Management                                        │
+│  - Creator Verification                                     │
+│  - Revenue Distribution                                     │
+└──────────────────┬──────────────────────────────────────────┘
+                   │
+                   │
+┌──────────────────▼──────────────────────────────────────────┐
+│                    Stellar Network                           │
+│  - Transaction Processing                                   │
+│  - Asset Management                                         │
+│  - Account Management                                       │
+└─────────────────────────────────────────────────────────────┘
+```
+
 ### Technology Stack
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Frontend Layer                        │
-│              Next.js 14 + TypeScript                     │
-│         (User App + Admin Dashboard)                     │
-└────────────────────┬────────────────────────────────────┘
-                     │
-┌────────────────────┴────────────────────────────────────┐
-│                    Backend Layer                         │
-│              NestJS + TypeScript                         │
-│  ┌──────────────┬──────────────┬──────────────┐        │
-│  │ Disbursement │     AI/ML    │   Trading    │        │
-│  │   Module     │    Engine    │   Engine     │        │
-│  └──────────────┴──────────────┴──────────────┘        │
-└────────────────────┬────────────────────────────────────┘
-                     │
-┌────────────────────┴────────────────────────────────────┐
-│                 Blockchain Layer                         │
-│             Stellar Soroban (Rust)                       │
-│  ┌──────────────┬──────────────┬──────────────┐        │
-│  │ Disbursement │    Asset     │  Portfolio   │        │
-│  │   Contract   │  Tokenization│  Management  │        │
-│  └──────────────┴──────────────┴──────────────┘        │
-└─────────────────────────────────────────────────────────┘
-```
+#### Frontend
+- **Framework**: Next.js 14 (App Router)
+- **UI Library**: React 18
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand / Redux Toolkit
+- **Wallet Integration**: @stellar/freighter-api
+- **Media Player**: Video.js / Howler.js
+- **Real-time**: Socket.io-client
 
-### Core Components
+#### Backend
+- **Framework**: NestJS
+- **Runtime**: Node.js 18+
+- **Database**: PostgreSQL
+- **Cache**: Redis
+- **Queue**: Bull (Redis-based)
+- **Stellar SDK**: @stellar/stellar-sdk
+- **Authentication**: JWT + Passport
+- **Real-time**: Socket.io
+- **File Storage**: AWS S3 / IPFS
 
-#### 1. Smart Contracts (Rust/Soroban)
-```
-contracts/
-├── disbursement/       # Payment distribution logic
-├── assets/            # Tokenized RWA management
-├── trading/           # Order matching and settlement
-└── portfolio/         # AI-triggered rebalancing
-```
+#### Smart Contracts
+- **Language**: Rust
+- **Platform**: Stellar Soroban
+- **Testing**: Soroban CLI & SDK
+- **Build Tool**: Cargo
 
-#### 2. Backend Services (NestJS)
-```
-apps/api/
-├── modules/
-│   ├── disbursement/  # SDP integration, SMS, wallet creation
-│   ├── assets/        # Asset tokenization, pricing, trading
-│   ├── ai/            # Portfolio optimization, risk analysis
-│   ├── stellar/       # Soroban client, Horizon API
-│   └── users/         # KYC, profiles, authentication
-```
+#### DevOps
+- **Containerization**: Docker
+- **Orchestration**: Docker Compose / Kubernetes
+- **CI/CD**: GitHub Actions
+- **Monitoring**: Prometheus + Grafana
 
-#### 3. Frontend Applications (Next.js)
-```
-apps/web/
-├── app/
-│   ├── (admin)/       # Organization dashboard
-│   ├── (user)/        # Recipient wallet & investment UI
-│   └── api/           # API routes
-```
+## 📁 Project Structure
 
----
+```
+streampay/
+├── frontend/                 # Next.js frontend application
+│   ├── src/
+│   │   ├── app/             # App router pages
+│   │   ├── components/      # React components
+│   │   ├── hooks/           # Custom React hooks
+│   │   ├── lib/             # Utility functions
+│   │   ├── stores/          # State management
+│   │   └── styles/          # Global styles
+│   ├── public/              # Static assets
+│   ├── package.json
+│   └── next.config.js
+│
+├── backend/                  # NestJS backend application
+│   ├── src/
+│   │   ├── modules/         # Feature modules
+│   │   │   ├── auth/
+│   │   │   ├── content/
+│   │   │   ├── payments/
+│   │   │   ├── streaming/
+│   │   │   └── users/
+│   │   ├── common/          # Shared utilities
+│   │   ├── config/          # Configuration
+│   │   └── main.ts          # Application entry
+│   ├── test/                # E2E tests
+│   ├── package.json
+│   └── nest-cli.json
+│
+├── contracts/                # Soroban smart contracts
+│   ├── payment-stream/      # Payment streaming contract
+│   ├── escrow/              # Escrow contract
+│   └── shared/              # Shared contract utilities
+│
+├── docker/                   # Docker configurations
+│   ├── frontend.Dockerfile
+│   ├── backend.Dockerfile
+│   └── docker-compose.yml
+│
+├── docs/                     # Additional documentation
+│   ├── API.md
+│   ├── ARCHITECTURE.md
+│   └── DEPLOYMENT.md
+│
+├── scripts/                  # Utility scripts
+│   ├── deploy-contracts.sh
+│   └── setup-db.sh
+│
+├── .github/                  # GitHub configurations
+│   └── workflows/           # CI/CD workflows
+│
+├── LICENSE
+└── README.md
+```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- **Node.js**: v18+ ([Download](https://nodejs.org))
-- **Rust**: v1.75+ ([Install](https://www.rust-lang.org/tools/install))
-- **Stellar CLI**: Latest ([Install](https://stellar.org/developers/docs))
-- **Docker**: For local development (Optional)
-- **PostgreSQL**: v14+ (Or use Docker)
+Before you begin, ensure you have the following installed:
+
+- **Node.js** (v18 or higher)
+- **npm** or **yarn** or **pnpm**
+- **Rust** (latest stable version)
+- **Docker** and **Docker Compose**
+- **PostgreSQL** (v14 or higher)
+- **Redis** (v7 or higher)
+- **Stellar CLI** (soroban-cli)
 
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
-git clone https://github.com/yourusername/stellartech.git
-cd stellartech
+git clone https://github.com/yourusername/streampay.git
+cd streampay
 ```
 
 2. **Install dependencies**
+
 ```bash
-# Install all packages
+# Install frontend dependencies
+cd frontend
 npm install
 
-# Or using yarn
-yarn install
+# Install backend dependencies
+cd ../backend
+npm install
+
+# Build smart contracts
+cd ../contracts
+cargo build --release
 ```
 
-3. **Set up environment variables**
-```bash
-# Copy example env files
-cp .env.example .env
-cp apps/api/.env.example apps/api/.env
-cp apps/web/.env.example apps/web/.env
+3. **Environment Configuration**
 
-# Edit with your configurations
-```
+Create `.env` files in both frontend and backend directories:
 
-4. **Configure Stellar Network**
-```bash
-# For testnet (development)
-export STELLAR_NETWORK=testnet
-export STELLAR_RPC_URL=https://soroban-testnet.stellar.org
-
-# Generate keypairs
-stellar keys generate admin --network testnet
-stellar keys generate deployer --network testnet
-```
-
-5. **Build and deploy smart contracts**
-```bash
-# Build contracts
-cd contracts
-cargo build --target wasm32-unknown-unknown --release
-
-# Deploy to testnet
-stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/disbursement.wasm \
-  --source deployer \
-  --network testnet
-
-# Save contract IDs to .env
-```
-
-6. **Set up the database**
-```bash
-# Run migrations
-npm run db:migrate
-
-# Seed initial data
-npm run db:seed
-```
-
-7. **Start development servers**
-```bash
-# Terminal 1: Start backend
-npm run dev:api
-
-# Terminal 2: Start frontend
-npm run dev:web
-
-# Or run both concurrently
-npm run dev
-```
-
-8. **Access the application**
-- Frontend: http://localhost:3000
-- API: http://localhost:3001
-- API Docs: http://localhost:3001/api/docs
-
----
-
-## 📋 Environment Variables
-
-### Backend (`apps/api/.env`)
-```env
-# Database
-DATABASE_URL=postgresql://user:password@localhost:5432/stellartech
-
-# Stellar
-STELLAR_NETWORK=testnet
-STELLAR_RPC_URL=https://soroban-testnet.stellar.org
-STELLAR_HORIZON_URL=https://horizon-testnet.stellar.org
-STELLAR_PASSPHRASE=Test SDF Network ; September 2015
-
-# Contract Addresses
-DISBURSEMENT_CONTRACT_ID=C...
-ASSET_CONTRACT_ID=C...
-TRADING_CONTRACT_ID=C...
-
-# Services
-SMS_PROVIDER=twilio
-TWILIO_ACCOUNT_SID=your_account_sid
-TWILIO_AUTH_TOKEN=your_auth_token
-
-# AI/ML
-OPENAI_API_KEY=your_openai_key
-AI_MODEL=gpt-4
-
-# Security
-JWT_SECRET=your_jwt_secret
-ENCRYPTION_KEY=your_encryption_key
-```
-
-### Frontend (`apps/web/.env`)
+**Frontend (.env.local)**
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:3001
 NEXT_PUBLIC_STELLAR_NETWORK=testnet
-NEXT_PUBLIC_STELLAR_HORIZON_URL=https://horizon-testnet.stellar.org
+NEXT_PUBLIC_HORIZON_URL=https://horizon-testnet.stellar.org
+NEXT_PUBLIC_WS_URL=ws://localhost:3001
 ```
 
----
+**Backend (.env)**
+```env
+# Application
+NODE_ENV=development
+PORT=3001
+API_PREFIX=api/v1
 
-## 🧪 Testing
+# Database
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USER=streampay
+DATABASE_PASSWORD=your_password
+DATABASE_NAME=streampay_db
 
-### Run all tests
-```bash
-npm test
+# Redis
+REDIS_HOST=localhost
+REDIS_PORT=6379
+
+# JWT
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRATION=7d
+
+# Stellar
+STELLAR_NETWORK=testnet
+HORIZON_URL=https://horizon-testnet.stellar.org
+STELLAR_MASTER_KEY=your_stellar_secret_key
+
+# AWS S3 (Optional)
+AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+S3_BUCKET_NAME=streampay-content
+
+# IPFS (Optional)
+IPFS_API_URL=https://ipfs.infura.io:5001
 ```
 
-### Test by component
+4. **Database Setup**
+
 ```bash
-# Smart contracts
-cd contracts && cargo test
+# Start PostgreSQL and Redis using Docker
+docker-compose up -d postgres redis
+
+# Run database migrations
+cd backend
+npm run migration:run
+```
+
+5. **Deploy Smart Contracts**
+
+```bash
+cd contracts
+
+# Install Soroban CLI if not already installed
+cargo install --locked soroban-cli
+
+# Build contracts
+soroban contract build
+
+# Deploy to testnet
+./scripts/deploy-contracts.sh
+```
+
+6. **Start Development Servers**
+
+```bash
+# Terminal 1 - Backend
+cd backend
+npm run start:dev
+
+# Terminal 2 - Frontend
+cd frontend
+npm run dev
+```
+
+The application will be available at:
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:3001
+- **API Documentation**: http://localhost:3001/api/docs
+
+## 🔧 Development
+
+### Running Tests
+
+```bash
+# Frontend tests
+cd frontend
+npm run test
+npm run test:e2e
+
+# Backend tests
+cd backend
+npm run test
+npm run test:e2e
+npm run test:cov
+
+# Smart contract tests
+cd contracts
+cargo test
+```
+
+### Code Formatting & Linting
+
+```bash
+# Frontend
+cd frontend
+npm run lint
+npm run format
 
 # Backend
-npm run test:api
+cd backend
+npm run lint
+npm run format
 
+# Contracts
+cd contracts
+cargo fmt
+cargo clippy
+```
+
+### Building for Production
+
+```bash
 # Frontend
-npm run test:web
+cd frontend
+npm run build
 
-# E2E tests
-npm run test:e2e
+# Backend
+cd backend
+npm run build
+
+# Contracts
+cd contracts
+cargo build --release --target wasm32-unknown-unknown
 ```
 
-### Test coverage
-```bash
-npm run test:cov
-```
+## 🐳 Docker Deployment
 
----
-
-## 📦 Deployment
-
-### Smart Contracts (Mainnet)
-
-```bash
-# Switch to mainnet
-export STELLAR_NETWORK=mainnet
-
-# Deploy contracts
-stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/disbursement.wasm \
-  --source deployer \
-  --network mainnet
-
-# Initialize contracts
-stellar contract invoke \
-  --id C... \
-  --source admin \
-  --network mainnet \
-  -- initialize --admin "G..."
-```
-
-### Backend (Cloud Platform)
+Build and run all services using Docker Compose:
 
 ```bash
-# Build production image
-docker build -t stellartech-api:latest -f apps/api/Dockerfile .
+# Build images
+docker-compose build
 
-# Deploy to your platform (AWS, GCP, Azure, Railway, etc.)
-# Example: Railway
-railway up
+# Start all services
+docker-compose up -d
 
-# Or use Docker Compose
-docker-compose -f docker-compose.prod.yml up -d
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
 ```
 
+## 📚 API Documentation
 
+API documentation is automatically generated using Swagger/OpenAPI and available at:
+
+```
+http://localhost:3001/api/docs
+```
+
+Key endpoints include:
+
+- `POST /api/v1/auth/register` - User registration
+- `POST /api/v1/auth/login` - User authentication
+- `GET /api/v1/content` - List content
+- `POST /api/v1/content` - Create content
+- `POST /api/v1/streaming/start` - Start streaming session
+- `POST /api/v1/streaming/stop` - Stop streaming session
+- `GET /api/v1/payments/history` - Payment history
+- `POST /api/v1/payments/withdraw` - Withdraw earnings
+
+## 🔐 Security Considerations
+
+- All API endpoints require JWT authentication
+- Stellar private keys are stored encrypted
+- Rate limiting implemented on all endpoints
+- Input validation using class-validator
+- SQL injection prevention with parameterized queries
+- XSS protection with content sanitization
+- CORS configured for allowed origins only
+
+## 🌐 Stellar Integration
+
+### Payment Flow
+
+1. User starts consuming content
+2. Frontend calculates micropayment amount per second
+3. Payment stream initiated via smart contract
+4. Funds held in escrow contract
+5. Periodic settlements to creator's Stellar account
+6. Session ends, final settlement processed
+
+### Smart Contract Functions
+
+- `initialize_stream()` - Create new payment stream
+- `deposit_funds()` - Deposit funds to escrow
+- `process_payment()` - Process micropayment
+- `settle_stream()` - Final settlement
+- `withdraw_earnings()` - Creator withdrawal
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting PRs.
-
-### Development Workflow
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+🙌**Contribution Guidelines:**
 
-
-
-
-
+Assignment required before PR submission
+Timeframe: 48-72 hours
+PR description must include: Close #[issue-number]
+Star the repo⭐
+For more context, please refer to the frontend README 🚀
